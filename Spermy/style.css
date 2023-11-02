@@ -1,0 +1,143 @@
+#section-4-20 {
+    background-image: linear-gradient(1deg, #111901c5, #111901cb), url(/images/bg.jpg) !important;
+    background-size: auto, auto;
+    background-color: #618309;
+    text-align: left;
+    height: 700px;
+
+}
+
+#CA {
+    background-image: linear-gradient(1deg, #111901c6, #111901c3), url(/images/bg.jpg) !important;
+    background-size: auto, auto;
+    background-color: #618309;
+    text-align: left;
+}
+
+#community {
+    background-image: linear-gradient(1deg, #111901c0, #111901c4), url(/images/bg.jpg) !important;
+    background-size: auto, auto;
+    background-color: #618309;
+    text-align: left;
+
+}
+
+img.check_icon {
+    width: 28px;
+    /* margin-top: 1px; */
+}
+
+.p_space {
+    padding: 5px 0;
+}
+
+#link_box {
+    align-items: stretch;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 30px;
+    display: grid;
+    text-align: center;
+}
+
+span.legend_text-lbl {
+    font-size: 20px;
+    /* margin-top: -10px; */
+    /* display: block; */
+    margin: 0;
+    padding: 0;
+}
+
+.img-full {
+    width: 320px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+
+
+.team-card {
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    height: 670px;
+}
+
+img.tg_icon {
+    width: 33px;
+    margin-top: 11px;
+}
+
+#road_map {
+
+    align-items: stretch;
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+    grid-column-gap: 30px;
+    grid-row-gap: 30px;
+    display: grid;
+    width: 100%;
+
+}
+
+/*******footer icon******/
+a#link-458-20 {
+    display: inline-block;
+    margin-right: 16px;
+    margin-top: 50px;
+}
+
+
+@media screen and (max-width:768px) {
+    .team-card {
+        margin-top: 18px
+    }
+
+    .team-card {
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        height: 780px;
+    }
+
+    .img-full {
+        width: 100%;
+
+    }
+
+    #section-4-20 {
+
+        height: 880px;
+
+    }
+
+    #link_box {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    #road_map {
+
+
+        grid-template-columns: 1fr;
+
+
+    }
+
+
+
+}
+
+@media screen and (max-width:476px) {
+    .team-card {
+        margin-top: 18px
+    }
+
+    .team-card {
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        height: 700px;
+    }
+
+    a#link-278-20 {
+        margin-top: 40px;
+    }
+
+}
