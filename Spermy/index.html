@@ -1,0 +1,1982 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta charset="UTF-8">
+  <script>if (navigator.userAgent.match(/MSIE|Internet Explorer/i) || navigator.userAgent.match(/Trident\/7\..*?rv:11/i)) { var href = document.location.href; if (!href.match(/[?&]nowprocket/)) { if (href.indexOf("?") == -1) { if (href.indexOf("#") == -1) { document.location.href = href + "?nowprocket=1" } else { document.location.href = href.replace("#", "?nowprocket=1#") } } else { if (href.indexOf("#") == -1) { document.location.href = href + "&nowprocket=1" } else { document.location.href = href.replace("#", "&nowprocket=1#") } } } }</script>
+  <script>class RocketLazyLoadScripts { constructor() { this.v = "1.2.3", this.triggerEvents = ["keydown", "mousedown", "mousemove", "touchmove", "touchstart", "touchend", "wheel"], this.userEventHandler = this._triggerListener.bind(this), this.touchStartHandler = this._onTouchStart.bind(this), this.touchMoveHandler = this._onTouchMove.bind(this), this.touchEndHandler = this._onTouchEnd.bind(this), this.clickHandler = this._onClick.bind(this), this.interceptedClicks = [], window.addEventListener("pageshow", t => { this.persisted = t.persisted }), window.addEventListener("DOMContentLoaded", () => { this._preconnect3rdParties() }), this.delayedScripts = { normal: [], async: [], defer: [] }, this.trash = [], this.allJQueries = [] } _addUserInteractionListener(t) { if (document.hidden) { t._triggerListener(); return } this.triggerEvents.forEach(e => window.addEventListener(e, t.userEventHandler, { passive: !0 })), window.addEventListener("touchstart", t.touchStartHandler, { passive: !0 }), window.addEventListener("mousedown", t.touchStartHandler), document.addEventListener("visibilitychange", t.userEventHandler) } _removeUserInteractionListener() { this.triggerEvents.forEach(t => window.removeEventListener(t, this.userEventHandler, { passive: !0 })), document.removeEventListener("visibilitychange", this.userEventHandler) } _onTouchStart(t) { "HTML" !== t.target.tagName && (window.addEventListener("touchend", this.touchEndHandler), window.addEventListener("mouseup", this.touchEndHandler), window.addEventListener("touchmove", this.touchMoveHandler, { passive: !0 }), window.addEventListener("mousemove", this.touchMoveHandler), t.target.addEventListener("click", this.clickHandler), this._renameDOMAttribute(t.target, "onclick", "rocket-onclick"), this._pendingClickStarted()) } _onTouchMove(t) { window.removeEventListener("touchend", this.touchEndHandler), window.removeEventListener("mouseup", this.touchEndHandler), window.removeEventListener("touchmove", this.touchMoveHandler, { passive: !0 }), window.removeEventListener("mousemove", this.touchMoveHandler), t.target.removeEventListener("click", this.clickHandler), this._renameDOMAttribute(t.target, "rocket-onclick", "onclick"), this._pendingClickFinished() } _onTouchEnd(t) { window.removeEventListener("touchend", this.touchEndHandler), window.removeEventListener("mouseup", this.touchEndHandler), window.removeEventListener("touchmove", this.touchMoveHandler, { passive: !0 }), window.removeEventListener("mousemove", this.touchMoveHandler) } _onClick(t) { t.target.removeEventListener("click", this.clickHandler), this._renameDOMAttribute(t.target, "rocket-onclick", "onclick"), this.interceptedClicks.push(t), t.preventDefault(), t.stopPropagation(), t.stopImmediatePropagation(), this._pendingClickFinished() } _replayClicks() { window.removeEventListener("touchstart", this.touchStartHandler, { passive: !0 }), window.removeEventListener("mousedown", this.touchStartHandler), this.interceptedClicks.forEach(t => { t.target.dispatchEvent(new MouseEvent("click", { view: t.view, bubbles: !0, cancelable: !0 })) }) } _waitForPendingClicks() { return new Promise(t => { this._isClickPending ? this._pendingClickFinished = t : t() }) } _pendingClickStarted() { this._isClickPending = !0 } _pendingClickFinished() { this._isClickPending = !1 } _renameDOMAttribute(t, e, r) { t.hasAttribute && t.hasAttribute(e) && (event.target.setAttribute(r, event.target.getAttribute(e)), event.target.removeAttribute(e)) } _triggerListener() { this._removeUserInteractionListener(this), "loading" === document.readyState ? document.addEventListener("DOMContentLoaded", this._loadEverythingNow.bind(this)) : this._loadEverythingNow() } _preconnect3rdParties() { let t = []; document.querySelectorAll("script[type=rocketlazyloadscript]").forEach(e => { if (e.hasAttribute("src")) { let r = new URL(e.src).origin; r !== location.origin && t.push({ src: r, crossOrigin: e.crossOrigin || "module" === e.getAttribute("data-rocket-type") }) } }), t = [...new Map(t.map(t => [JSON.stringify(t), t])).values()], this._batchInjectResourceHints(t, "preconnect") } async _loadEverythingNow() { this.lastBreath = Date.now(), this._delayEventListeners(this), this._delayJQueryReady(this), this._handleDocumentWrite(), this._registerAllDelayedScripts(), this._preloadAllScripts(), await this._loadScriptsFromList(this.delayedScripts.normal), await this._loadScriptsFromList(this.delayedScripts.defer), await this._loadScriptsFromList(this.delayedScripts.async); try { await this._triggerDOMContentLoaded(), await this._triggerWindowLoad() } catch (t) { console.error(t) } window.dispatchEvent(new Event("rocket-allScriptsLoaded")), this._waitForPendingClicks().then(() => { this._replayClicks() }), this._emptyTrash() } _registerAllDelayedScripts() { document.querySelectorAll("script[type=rocketlazyloadscript]").forEach(t => { t.hasAttribute("data-rocket-src") ? t.hasAttribute("async") && !1 !== t.async ? this.delayedScripts.async.push(t) : t.hasAttribute("defer") && !1 !== t.defer || "module" === t.getAttribute("data-rocket-type") ? this.delayedScripts.defer.push(t) : this.delayedScripts.normal.push(t) : this.delayedScripts.normal.push(t) }) } async _transformScript(t) { return new Promise((await this._littleBreath(), navigator.userAgent.indexOf("Firefox/") > 0 || "" === navigator.vendor) ? e => { let r = document.createElement("script");[...t.attributes].forEach(t => { let e = t.nodeName; "type" !== e && ("data-rocket-type" === e && (e = "type"), "data-rocket-src" === e && (e = "src"), r.setAttribute(e, t.nodeValue)) }), t.text && (r.text = t.text), r.hasAttribute("src") ? (r.addEventListener("load", e), r.addEventListener("error", e)) : (r.text = t.text, e()); try { t.parentNode.replaceChild(r, t) } catch (i) { e() } } : async e => { function r() { t.setAttribute("data-rocket-status", "failed"), e() } try { let i = t.getAttribute("data-rocket-type"), n = t.getAttribute("data-rocket-src"); t.text, i ? (t.type = i, t.removeAttribute("data-rocket-type")) : t.removeAttribute("type"), t.addEventListener("load", function r() { t.setAttribute("data-rocket-status", "executed"), e() }), t.addEventListener("error", r), n ? (t.removeAttribute("data-rocket-src"), t.src = n) : t.src = "data:text/javascript;base64," + window.btoa(unescape(encodeURIComponent(t.text))) } catch (s) { r() } }) } async _loadScriptsFromList(t) { let e = t.shift(); return e && e.isConnected ? (await this._transformScript(e), this._loadScriptsFromList(t)) : Promise.resolve() } _preloadAllScripts() { this._batchInjectResourceHints([...this.delayedScripts.normal, ...this.delayedScripts.defer, ...this.delayedScripts.async], "preload") } _batchInjectResourceHints(t, e) { var r = document.createDocumentFragment(); t.forEach(t => { let i = t.getAttribute && t.getAttribute("data-rocket-src") || t.src; if (i) { let n = document.createElement("link"); n.href = i, n.rel = e, "preconnect" !== e && (n.as = "script"), t.getAttribute && "module" === t.getAttribute("data-rocket-type") && (n.crossOrigin = !0), t.crossOrigin && (n.crossOrigin = t.crossOrigin), t.integrity && (n.integrity = t.integrity), r.appendChild(n), this.trash.push(n) } }), document.head.appendChild(r) } _delayEventListeners(t) { let e = {}; function r(t, r) { !function t(r) { !e[r] && (e[r] = { originalFunctions: { add: r.addEventListener, remove: r.removeEventListener }, eventsToRewrite: [] }, r.addEventListener = function () { arguments[0] = i(arguments[0]), e[r].originalFunctions.add.apply(r, arguments) }, r.removeEventListener = function () { arguments[0] = i(arguments[0]), e[r].originalFunctions.remove.apply(r, arguments) }); function i(t) { return e[r].eventsToRewrite.indexOf(t) >= 0 ? "rocket-" + t : t } }(t), e[t].eventsToRewrite.push(r) } function i(t, e) { let r = t[e]; Object.defineProperty(t, e, { get: () => r || function () { }, set(i) { t["rocket" + e] = r = i } }) } r(document, "DOMContentLoaded"), r(window, "DOMContentLoaded"), r(window, "load"), r(window, "pageshow"), r(document, "readystatechange"), i(document, "onreadystatechange"), i(window, "onload"), i(window, "onpageshow") } _delayJQueryReady(t) { let e; function r(r) { if (r && r.fn && !t.allJQueries.includes(r)) { r.fn.ready = r.fn.init.prototype.ready = function (e) { return t.domReadyFired ? e.bind(document)(r) : document.addEventListener("rocket-DOMContentLoaded", () => e.bind(document)(r)), r([]) }; let i = r.fn.on; r.fn.on = r.fn.init.prototype.on = function () { if (this[0] === window) { function t(t) { return t.split(" ").map(t => "load" === t || 0 === t.indexOf("load.") ? "rocket-jquery-load" : t).join(" ") } "string" == typeof arguments[0] || arguments[0] instanceof String ? arguments[0] = t(arguments[0]) : "object" == typeof arguments[0] && Object.keys(arguments[0]).forEach(e => { let r = arguments[0][e]; delete arguments[0][e], arguments[0][t(e)] = r }) } return i.apply(this, arguments), this }, t.allJQueries.push(r) } e = r } r(window.jQuery), Object.defineProperty(window, "jQuery", { get: () => e, set(t) { r(t) } }) } async _triggerDOMContentLoaded() { this.domReadyFired = !0, await this._littleBreath(), document.dispatchEvent(new Event("rocket-DOMContentLoaded")), await this._littleBreath(), window.dispatchEvent(new Event("rocket-DOMContentLoaded")), await this._littleBreath(), document.dispatchEvent(new Event("rocket-readystatechange")), await this._littleBreath(), document.rocketonreadystatechange && document.rocketonreadystatechange() } async _triggerWindowLoad() { await this._littleBreath(), window.dispatchEvent(new Event("rocket-load")), await this._littleBreath(), window.rocketonload && window.rocketonload(), await this._littleBreath(), this.allJQueries.forEach(t => t(window).trigger("rocket-jquery-load")), await this._littleBreath(); let t = new Event("rocket-pageshow"); t.persisted = this.persisted, window.dispatchEvent(t), await this._littleBreath(), window.rocketonpageshow && window.rocketonpageshow({ persisted: this.persisted }) } _handleDocumentWrite() { let t = new Map; document.write = document.writeln = function (e) { let r = document.currentScript; r || console.error("WPRocket unable to document.write this: " + e); let i = document.createRange(), n = r.parentElement, s = t.get(r); void 0 === s && (s = r.nextSibling, t.set(r, s)); let a = document.createDocumentFragment(); i.setStart(a, 0), a.appendChild(i.createContextualFragment(e)), n.insertBefore(a, s) } } async _littleBreath() { Date.now() - this.lastBreath > 45 && (await this._requestAnimFrame(), this.lastBreath = Date.now()) } async _requestAnimFrame() { return document.hidden ? new Promise(t => setTimeout(t)) : new Promise(t => requestAnimationFrame(t)) } _emptyTrash() { this.trash.forEach(t => t.remove()) } static run() { let t = new RocketLazyLoadScripts; t._addUserInteractionListener(t) } } RocketLazyLoadScripts.run();</script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+  <link rel="preload" as="image" href="https://www.scoobyderc.xyz/">
+  <title>Scooby-Doo</title>
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css?family=Open%20Sans%3A100%2C200%2C300%2C400%2C500%2C600%2C700%2C800%2C900%7CSource%20Sans%20Pro%3A100%2C200%2C300%2C400%2C500%2C600%2C700%2C800%2C900%7CMitr%3A100%2C200%2C300%2C400%2C500%2C600%2C700%2C800%2C900&#038;display=swap" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Open%20Sans%3A100%2C200%2C300%2C400%2C500%2C600%2C700%2C800%2C900%7CSource%20Sans%20Pro%3A100%2C200%2C300%2C400%2C500%2C600%2C700%2C800%2C900%7CMitr%3A100%2C200%2C300%2C400%2C500%2C600%2C700%2C800%2C900&#038;display=swap"
+    media="print" onload="this.media='all'" /><noscript>
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Open%20Sans%3A100%2C200%2C300%2C400%2C500%2C600%2C700%2C800%2C900%7CSource%20Sans%20Pro%3A100%2C200%2C300%2C400%2C500%2C600%2C700%2C800%2C900%7CMitr%3A100%2C200%2C300%2C400%2C500%2C600%2C700%2C800%2C900&#038;display=swap" />
+
+    <script src="https://kit.fontawesome.com/f5a24ca635.js" crossorigin="anonymous"></script>
+
+  </noscript>
+  <meta name="description"
+    content="1% taxes, No team tokens, Contract verified, Contract audited and Liquidity locked and renounced!">
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+
+
+
+  <script
+    type="application/ld+json">{"@context":"https:\/\/schema.org","@type":"WebSite","name":"TOKEN","alternateName":"TOKEN","description":"","url":"https:\/\/tokentoken.vip","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https:\/\/tokentoken.vip\/?s={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
+
+
+  <link href='https://fonts.gstatic.com' crossorigin rel='preconnect' />
+  <link rel="alternate" type="application/rss+xml" title="TOKEN &raquo; Feed" href="https://tokentoken.vip/feed/" />
+  <link rel="alternate" type="application/rss+xml" title="TOKEN &raquo; Comments Feed"
+    href="https://tokentoken.vip/comments/feed/" />
+  <script type="application/ld+json">{"@context":"https:\/\/schema.org"}</script>
+  <style id='wp-block-library-inline-css'>
+    :root {
+      --wp-admin-theme-color: #007cba;
+      --wp-admin-theme-color--rgb: 0, 124, 186;
+      --wp-admin-theme-color-darker-10: #006ba1;
+      --wp-admin-theme-color-darker-10--rgb: 0, 107, 161;
+      --wp-admin-theme-color-darker-20: #005a87;
+      --wp-admin-theme-color-darker-20--rgb: 0, 90, 135;
+      --wp-admin-border-width-focus: 2px;
+      --wp-block-synced-color: #7a00df;
+      --wp-block-synced-color--rgb: 122, 0, 223
+    }
+
+    @media (-webkit-min-device-pixel-ratio:2),
+    (min-resolution:192dpi) {
+      :root {
+        --wp-admin-border-width-focus: 1.5px
+      }
+    }
+
+    .wp-element-button {
+      cursor: pointer
+    }
+
+    :root {
+      --wp--preset--font-size--normal: 16px;
+      --wp--preset--font-size--huge: 42px
+    }
+
+    :root .has-very-light-gray-background-color {
+      background-color: #eee
+    }
+
+    :root .has-very-dark-gray-background-color {
+      background-color: #313131
+    }
+
+    :root .has-very-light-gray-color {
+      color: #eee
+    }
+
+    :root .has-very-dark-gray-color {
+      color: #313131
+    }
+
+    :root .has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background {
+      background: linear-gradient(135deg, #00d084, #0693e3)
+    }
+
+    :root .has-purple-crush-gradient-background {
+      background: linear-gradient(135deg, #34e2e4, #4721fb 50%, #ab1dfe)
+    }
+
+    :root .has-hazy-dawn-gradient-background {
+      background: linear-gradient(135deg, #faaca8, #dad0ec)
+    }
+
+    :root .has-subdued-olive-gradient-background {
+      background: linear-gradient(135deg, #fafae1, #67a671)
+    }
+
+    :root .has-atomic-cream-gradient-background {
+      background: linear-gradient(135deg, #fdd79a, #004a59)
+    }
+
+    :root .has-nightshade-gradient-background {
+      background: linear-gradient(135deg, #330968, #31cdcf)
+    }
+
+    :root .has-midnight-gradient-background {
+      background: linear-gradient(135deg, #020381, #2874fc)
+    }
+
+    .has-regular-font-size {
+      font-size: 1em
+    }
+
+    .has-larger-font-size {
+      font-size: 2.625em
+    }
+
+    .has-normal-font-size {
+      font-size: var(--wp--preset--font-size--normal)
+    }
+
+    .has-huge-font-size {
+      font-size: var(--wp--preset--font-size--huge)
+    }
+
+    .has-text-align-center {
+      text-align: center
+    }
+
+    .has-text-align-left {
+      text-align: left
+    }
+
+    .has-text-align-right {
+      text-align: right
+    }
+
+    #end-resizable-editor-section {
+      display: none
+    }
+
+    .aligncenter {
+      clear: both
+    }
+
+    .items-justified-left {
+      justify-content: flex-start
+    }
+
+    .items-justified-center {
+      justify-content: center
+    }
+
+    .items-justified-right {
+      justify-content: flex-end
+    }
+
+    .items-justified-space-between {
+      justify-content: space-between
+    }
+
+    .screen-reader-text {
+      clip: rect(1px, 1px, 1px, 1px);
+      word-wrap: normal !important;
+      border: 0;
+      -webkit-clip-path: inset(50%);
+      clip-path: inset(50%);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px
+    }
+
+    .screen-reader-text:focus {
+      clip: auto !important;
+      background-color: #ddd;
+      -webkit-clip-path: none;
+      clip-path: none;
+      color: #444;
+      display: block;
+      font-size: 1em;
+      height: auto;
+      left: 5px;
+      line-height: normal;
+      padding: 15px 23px 14px;
+      text-decoration: none;
+      top: 5px;
+      width: auto;
+      z-index: 100000
+    }
+
+    html :where(.has-border-color) {
+      border-style: solid
+    }
+
+    html :where([style*=border-top-color]) {
+      border-top-style: solid
+    }
+
+    html :where([style*=border-right-color]) {
+      border-right-style: solid
+    }
+
+    html :where([style*=border-bottom-color]) {
+      border-bottom-style: solid
+    }
+
+    html :where([style*=border-left-color]) {
+      border-left-style: solid
+    }
+
+    html :where([style*=border-width]) {
+      border-style: solid
+    }
+
+    html :where([style*=border-top-width]) {
+      border-top-style: solid
+    }
+
+    html :where([style*=border-right-width]) {
+      border-right-style: solid
+    }
+
+    html :where([style*=border-bottom-width]) {
+      border-bottom-style: solid
+    }
+
+    html :where([style*=border-left-width]) {
+      border-left-style: solid
+    }
+
+    html :where(img[class*=wp-image-]) {
+      height: auto;
+      max-width: 100%
+    }
+
+    figure {
+      margin: 0 0 1em
+    }
+
+    html :where(.is-position-sticky) {
+      --wp-admin--admin-bar--position-offset: var(--wp-admin--admin-bar--height, 0px)
+    }
+
+    @media screen and (max-width:600px) {
+      html :where(.is-position-sticky) {
+        --wp-admin--admin-bar--position-offset: 0px
+      }
+    }
+  </style>
+  <link rel='stylesheet' id='classic-theme-styles-css'
+    href='https://tokentoken.vip/wp-includes/css/classic-themes.min.css?ver=6.2.2' media='all' />
+
+  <link rel="stylesheet" href="style.css">
+  <style id='global-styles-inline-css'>
+    body {
+      --wp--preset--color--black: #000000;
+      --wp--preset--color--cyan-bluish-gray: #abb8c3;
+      --wp--preset--color--white: #ffffff;
+      --wp--preset--color--pale-pink: #f78da7;
+      --wp--preset--color--vivid-red: #cf2e2e;
+      --wp--preset--color--luminous-vivid-orange: #ff6900;
+      --wp--preset--color--luminous-vivid-amber: #fcb900;
+      --wp--preset--color--light-green-cyan: #7bdcb5;
+      --wp--preset--color--vivid-green-cyan: #00d084;
+      --wp--preset--color--pale-cyan-blue: #8ed1fc;
+      --wp--preset--color--vivid-cyan-blue: #0693e3;
+      --wp--preset--color--vivid-purple: #9b51e0;
+      --wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg, rgba(6, 147, 227, 1) 0%, rgb(155, 81, 224) 100%);
+      --wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg, rgb(122, 220, 180) 0%, rgb(0, 208, 130) 100%);
+      --wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg, rgba(252, 185, 0, 1) 0%, rgba(255, 105, 0, 1) 100%);
+      --wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg, rgba(255, 105, 0, 1) 0%, rgb(207, 46, 46) 100%);
+      --wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg, rgb(238, 238, 238) 0%, rgb(169, 184, 195) 100%);
+      --wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg, rgb(74, 234, 220) 0%, rgb(151, 120, 209) 20%, rgb(207, 42, 186) 40%, rgb(238, 44, 130) 60%, rgb(251, 105, 98) 80%, rgb(254, 248, 76) 100%);
+      --wp--preset--gradient--blush-light-purple: linear-gradient(135deg, rgb(255, 206, 236) 0%, rgb(152, 150, 240) 100%);
+      --wp--preset--gradient--blush-bordeaux: linear-gradient(135deg, rgb(254, 205, 165) 0%, rgb(254, 45, 45) 50%, rgb(107, 0, 62) 100%);
+      --wp--preset--gradient--luminous-dusk: linear-gradient(135deg, rgb(255, 203, 112) 0%, rgb(199, 81, 192) 50%, rgb(65, 88, 208) 100%);
+      --wp--preset--gradient--pale-ocean: linear-gradient(135deg, rgb(255, 245, 203) 0%, rgb(182, 227, 212) 50%, rgb(51, 167, 181) 100%);
+      --wp--preset--gradient--electric-grass: linear-gradient(135deg, rgb(202, 248, 128) 0%, rgb(113, 206, 126) 100%);
+      --wp--preset--gradient--midnight: linear-gradient(135deg, rgb(2, 3, 129) 0%, rgb(40, 116, 252) 100%);
+      --wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');
+      --wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');
+      --wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');
+      --wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');
+      --wp--preset--duotone--midnight: url('#wp-duotone-midnight');
+      --wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');
+      --wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');
+      --wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');
+      --wp--preset--font-size--small: 13px;
+      --wp--preset--font-size--medium: 20px;
+      --wp--preset--font-size--large: 36px;
+      --wp--preset--font-size--x-large: 42px;
+      --wp--preset--spacing--20: 0.44rem;
+      --wp--preset--spacing--30: 0.67rem;
+      --wp--preset--spacing--40: 1rem;
+      --wp--preset--spacing--50: 1.5rem;
+      --wp--preset--spacing--60: 2.25rem;
+      --wp--preset--spacing--70: 3.38rem;
+      --wp--preset--spacing--80: 5.06rem;
+      --wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);
+      --wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);
+      --wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);
+      --wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);
+      --wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);
+    }
+
+    :where(.is-layout-flex) {
+      gap: 0.5em;
+    }
+
+    body .is-layout-flow>.alignleft {
+      float: left;
+      margin-inline-start: 0;
+      margin-inline-end: 2em;
+    }
+
+    body .is-layout-flow>.alignright {
+      float: right;
+      margin-inline-start: 2em;
+      margin-inline-end: 0;
+    }
+
+    body .is-layout-flow>.aligncenter {
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+
+    body .is-layout-constrained>.alignleft {
+      float: left;
+      margin-inline-start: 0;
+      margin-inline-end: 2em;
+    }
+
+    body .is-layout-constrained>.alignright {
+      float: right;
+      margin-inline-start: 2em;
+      margin-inline-end: 0;
+    }
+
+    body .is-layout-constrained>.aligncenter {
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+
+    body .is-layout-constrained> :where(:not(.alignleft):not(.alignright):not(.alignfull)) {
+      max-width: var(--wp--style--global--content-size);
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+
+    body .is-layout-constrained>.alignwide {
+      max-width: var(--wp--style--global--wide-size);
+    }
+
+    body .is-layout-flex {
+      display: flex;
+    }
+
+    body .is-layout-flex {
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    body .is-layout-flex>* {
+      margin: 0;
+    }
+
+    :where(.wp-block-columns.is-layout-flex) {
+      gap: 2em;
+    }
+
+    .has-black-color {
+      color: var(--wp--preset--color--black) !important;
+    }
+
+    .has-cyan-bluish-gray-color {
+      color: var(--wp--preset--color--cyan-bluish-gray) !important;
+    }
+
+    .has-white-color {
+      color: var(--wp--preset--color--white) !important;
+    }
+
+    .has-pale-pink-color {
+      color: var(--wp--preset--color--pale-pink) !important;
+    }
+
+    .has-vivid-red-color {
+      color: var(--wp--preset--color--vivid-red) !important;
+    }
+
+    .has-luminous-vivid-orange-color {
+      color: var(--wp--preset--color--luminous-vivid-orange) !important;
+    }
+
+    .has-luminous-vivid-amber-color {
+      color: var(--wp--preset--color--luminous-vivid-amber) !important;
+    }
+
+    .has-light-green-cyan-color {
+      color: var(--wp--preset--color--light-green-cyan) !important;
+    }
+
+    .has-vivid-green-cyan-color {
+      color: var(--wp--preset--color--vivid-green-cyan) !important;
+    }
+
+    .has-pale-cyan-blue-color {
+      color: var(--wp--preset--color--pale-cyan-blue) !important;
+    }
+
+    .has-vivid-cyan-blue-color {
+      color: var(--wp--preset--color--vivid-cyan-blue) !important;
+    }
+
+    .has-vivid-purple-color {
+      color: var(--wp--preset--color--vivid-purple) !important;
+    }
+
+    .has-black-background-color {
+      background-color: var(--wp--preset--color--black) !important;
+    }
+
+    .has-cyan-bluish-gray-background-color {
+      background-color: var(--wp--preset--color--cyan-bluish-gray) !important;
+    }
+
+    .has-white-background-color {
+      background-color: var(--wp--preset--color--white) !important;
+    }
+
+    .has-pale-pink-background-color {
+      background-color: var(--wp--preset--color--pale-pink) !important;
+    }
+
+    .has-vivid-red-background-color {
+      background-color: var(--wp--preset--color--vivid-red) !important;
+    }
+
+    .has-luminous-vivid-orange-background-color {
+      background-color: var(--wp--preset--color--luminous-vivid-orange) !important;
+    }
+
+    .has-luminous-vivid-amber-background-color {
+      background-color: var(--wp--preset--color--luminous-vivid-amber) !important;
+    }
+
+    .has-light-green-cyan-background-color {
+      background-color: var(--wp--preset--color--light-green-cyan) !important;
+    }
+
+    .has-vivid-green-cyan-background-color {
+      background-color: var(--wp--preset--color--vivid-green-cyan) !important;
+    }
+
+    .has-pale-cyan-blue-background-color {
+      background-color: var(--wp--preset--color--pale-cyan-blue) !important;
+    }
+
+    .has-vivid-cyan-blue-background-color {
+      background-color: var(--wp--preset--color--vivid-cyan-blue) !important;
+    }
+
+    .has-vivid-purple-background-color {
+      background-color: var(--wp--preset--color--vivid-purple) !important;
+    }
+
+    .has-black-border-color {
+      border-color: var(--wp--preset--color--black) !important;
+    }
+
+    .has-cyan-bluish-gray-border-color {
+      border-color: var(--wp--preset--color--cyan-bluish-gray) !important;
+    }
+
+    .has-white-border-color {
+      border-color: var(--wp--preset--color--white) !important;
+    }
+
+    .has-pale-pink-border-color {
+      border-color: var(--wp--preset--color--pale-pink) !important;
+    }
+
+    .has-vivid-red-border-color {
+      border-color: var(--wp--preset--color--vivid-red) !important;
+    }
+
+    .has-luminous-vivid-orange-border-color {
+      border-color: var(--wp--preset--color--luminous-vivid-orange) !important;
+    }
+
+    .has-luminous-vivid-amber-border-color {
+      border-color: var(--wp--preset--color--luminous-vivid-amber) !important;
+    }
+
+    .has-light-green-cyan-border-color {
+      border-color: var(--wp--preset--color--light-green-cyan) !important;
+    }
+
+    .has-vivid-green-cyan-border-color {
+      border-color: var(--wp--preset--color--vivid-green-cyan) !important;
+    }
+
+    .has-pale-cyan-blue-border-color {
+      border-color: var(--wp--preset--color--pale-cyan-blue) !important;
+    }
+
+    .has-vivid-cyan-blue-border-color {
+      border-color: var(--wp--preset--color--vivid-cyan-blue) !important;
+    }
+
+    .has-vivid-purple-border-color {
+      border-color: var(--wp--preset--color--vivid-purple) !important;
+    }
+
+    .has-vivid-cyan-blue-to-vivid-purple-gradient-background {
+      background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;
+    }
+
+    .has-light-green-cyan-to-vivid-green-cyan-gradient-background {
+      background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;
+    }
+
+    .has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background {
+      background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;
+    }
+
+    .has-luminous-vivid-orange-to-vivid-red-gradient-background {
+      background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;
+    }
+
+    .has-very-light-gray-to-cyan-bluish-gray-gradient-background {
+      background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;
+    }
+
+    .has-cool-to-warm-spectrum-gradient-background {
+      background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;
+    }
+
+    .has-blush-light-purple-gradient-background {
+      background: var(--wp--preset--gradient--blush-light-purple) !important;
+    }
+
+    .has-blush-bordeaux-gradient-background {
+      background: var(--wp--preset--gradient--blush-bordeaux) !important;
+    }
+
+    .has-luminous-dusk-gradient-background {
+      background: var(--wp--preset--gradient--luminous-dusk) !important;
+    }
+
+    .has-pale-ocean-gradient-background {
+      background: var(--wp--preset--gradient--pale-ocean) !important;
+    }
+
+    .has-electric-grass-gradient-background {
+      background: var(--wp--preset--gradient--electric-grass) !important;
+    }
+
+    .has-midnight-gradient-background {
+      background: var(--wp--preset--gradient--midnight) !important;
+    }
+
+    .has-small-font-size {
+      font-size: var(--wp--preset--font-size--small) !important;
+    }
+
+    .has-medium-font-size {
+      font-size: var(--wp--preset--font-size--medium) !important;
+    }
+
+    .has-large-font-size {
+      font-size: var(--wp--preset--font-size--large) !important;
+    }
+
+    .has-x-large-font-size {
+      font-size: var(--wp--preset--font-size--x-large) !important;
+    }
+  </style>
+  <link data-minify="1" rel='stylesheet' id='oxygen-css'
+    href='https://tokentoken.vip/wp-content/cache/min/1/wp-content/plugins/oxygen/component-framework/oxygen.css?ver=1686711612'
+    media='all' />
+  <script type="rocketlazyloadscript"
+    data-rocket-src='https://tokentoken.vip/wp-includes/js/jquery/jquery.min.js?ver=3.6.4' id='jquery-core-js'
+    defer></script>
+  <link rel="https://api.w.org/" href="https://tokentoken.vip/wp-json/" />
+  <link rel="alternate" type="application/json" href="https://tokentoken.vip/wp-json/wp/v2/pages/16" />
+  <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://tokentoken.vip/xmlrpc.php?rsd" />
+  <link rel="wlwmanifest" type="application/wlwmanifest+xml"
+    href="https://tokentoken.vip/wp-includes/wlwmanifest.xml" />
+
+  <link rel='shortlink' href='https://tokentoken.vip/' />
+  <link rel="alternate" type="application/json+oembed"
+    href="https://tokentoken.vip/wp-json/oembed/1.0/embed?url=https%3A%2F%2Ftokentoken.vip%2F" />
+  <link rel="alternate" type="text/xml+oembed"
+    href="https://tokentoken.vip/wp-json/oembed/1.0/embed?url=https%3A%2F%2Ftokentoken.vip%2F&#038;format=xml" />
+  <style id='script-64574984a2074-css' type='text/css'>
+    .ct-section-inner-wrap {
+      width: 100%;
+    }
+
+    .tooltip {
+      font-family: 'Mitr', sans-serif;
+      position: absolute;
+      left: 50%;
+      top: 8px !important;
+      transform: translateX(-50%);
+      background-color: #1b2801;
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 16px;
+      opacity: 0;
+      transition: opacity 0.2s ease-in-out;
+      width: 85px;
+      text-align: center;
+    }
+
+    @media only screen and (max-width: 992px) {
+      .tooltip {
+        top: 33px !important;
+        left: 50%;
+        z-index: 5;
+      }
+    }
+
+    @media only screen and (max-width: 480px) {
+      .tooltip {
+        top: 29px !important;
+        left: 50%;
+        z-index: 5;
+      }
+    }
+
+    .tooltip--visible {
+      opacity: 1;
+    }
+
+    .oxy-offcanvas_backdrop {
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px)
+    }
+
+    #pie-chart {
+      width: 420px;
+      height: 420px;
+      margin: 0 auto;
+    }
+
+    #chart-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #legend {
+      margin-left: 20px;
+    }
+
+    #legend:hover {
+      cursor: pointer;
+    }
+
+    #legend .legend-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    #pie-chart svg {
+      overflow: visible;
+    }
+
+    #tooltip.hidden {
+      visibility: hidden;
+    }
+
+    .color-box {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      margin-right: 5px;
+    }
+
+    .legend-item {
+      font-family: "Open Sans", sans-serif;
+      color: #1b2801;
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+
+    .legend-color {
+      width: 15px;
+      height: 15px;
+      margin-right: 5px;
+      border-radius: 3px;
+    }
+
+    #tooltip {
+      font-family: "Open Sans", sans-serif;
+      font-size: 16px;
+      color: #1b2801;
+    }
+
+    /* Media queries for responsiveness */
+    @media only screen and (max-width: 480px) {
+
+      /* Adjust the chart size for smaller screens */
+      #pie-chart {
+        max-width: 300px;
+        max-height: 300px;
+      }
+
+      /* Adjust the tooltip position for smaller screens */
+      #tooltip {
+        font-size: 14px;
+        padding: 8px;
+      }
+
+
+
+      /***custom css**/
+  </style>
+  <script type="rocketlazyloadscript" data-minify="1"
+    data-rocket-src="https://tokentoken.vip/wp-content/cache/min/1/d3.v7.min.js?ver=1686711612" defer></script>
+  <link rel="icon" href="/images/head-logo.png" sizes="32x32" />
+  <link rel="icon" href="/images/head-logo.png" sizes="192x192" />
+  <link rel="apple-touch-icon" href="/images/head-logo.png" />
+
+
+  <meta name="msapplication-TileImage"
+    content="https://tokentoken.vip/wp-content/uploads/2023/06/cropped-favicon-270x270.png" />
+  <link data-minify="1" rel='stylesheet' id='oxygen-cache-20-css'
+    href='https://tokentoken.vip/wp-content/cache/min/1/wp-content/uploads/oxygen/css/20.css?ver=1686711612'
+    media='all' />
+  <link data-minify="1" rel='stylesheet' id='oxygen-universal-styles-css'
+    href='https://tokentoken.vip/wp-content/cache/min/1/wp-content/uploads/oxygen/css/universal.css?ver=1686711612'
+    media='all' />
+  <noscript>
+    <style id="rocket-lazyload-nojs-css">
+      .rll-youtube-player,
+      [data-lazy-src] {
+        display: none !important;
+      }
+    </style>
+  </noscript><!-- END OF WP_HEAD() -->
+
+
+
+</head>
+
+<body class="home page-template-default page page-id-16 wp-embed-responsive  oxygen-body">
+
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none"
+    style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;">
+    <defs>
+      <filter id="wp-duotone-dark-grayscale">
+        <feColorMatrix color-interpolation-filters="sRGB" type="matrix"
+          values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " />
+        <feComponentTransfer color-interpolation-filters="sRGB">
+          <feFuncR type="table" tableValues="0 0.49803921568627" />
+          <feFuncG type="table" tableValues="0 0.49803921568627" />
+          <feFuncB type="table" tableValues="0 0.49803921568627" />
+          <feFuncA type="table" tableValues="1 1" />
+        </feComponentTransfer>
+        <feComposite in2="SourceGraphic" operator="in" />
+      </filter>
+    </defs>
+  </svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none"
+    style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;">
+    <defs>
+      <filter id="wp-duotone-grayscale">
+        <feColorMatrix color-interpolation-filters="sRGB" type="matrix"
+          values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " />
+        <feComponentTransfer color-interpolation-filters="sRGB">
+          <feFuncR type="table" tableValues="0 1" />
+          <feFuncG type="table" tableValues="0 1" />
+          <feFuncB type="table" tableValues="0 1" />
+          <feFuncA type="table" tableValues="1 1" />
+        </feComponentTransfer>
+        <feComposite in2="SourceGraphic" operator="in" />
+      </filter>
+    </defs>
+  </svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none"
+    style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;">
+    <defs>
+      <filter id="wp-duotone-purple-yellow">
+        <feColorMatrix color-interpolation-filters="sRGB" type="matrix"
+          values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " />
+        <feComponentTransfer color-interpolation-filters="sRGB">
+          <feFuncR type="table" tableValues="0.54901960784314 0.98823529411765" />
+          <feFuncG type="table" tableValues="0 1" />
+          <feFuncB type="table" tableValues="0.71764705882353 0.25490196078431" />
+          <feFuncA type="table" tableValues="1 1" />
+        </feComponentTransfer>
+        <feComposite in2="SourceGraphic" operator="in" />
+      </filter>
+    </defs>
+  </svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none"
+    style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;">
+    <defs>
+      <filter id="wp-duotone-blue-red">
+        <feColorMatrix color-interpolation-filters="sRGB" type="matrix"
+          values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " />
+        <feComponentTransfer color-interpolation-filters="sRGB">
+          <feFuncR type="table" tableValues="0 1" />
+          <feFuncG type="table" tableValues="0 0.27843137254902" />
+          <feFuncB type="table" tableValues="0.5921568627451 0.27843137254902" />
+          <feFuncA type="table" tableValues="1 1" />
+        </feComponentTransfer>
+        <feComposite in2="SourceGraphic" operator="in" />
+      </filter>
+    </defs>
+  </svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none"
+    style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;">
+    <defs>
+      <filter id="wp-duotone-midnight">
+        <feColorMatrix color-interpolation-filters="sRGB" type="matrix"
+          values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " />
+        <feComponentTransfer color-interpolation-filters="sRGB">
+          <feFuncR type="table" tableValues="0 0" />
+          <feFuncG type="table" tableValues="0 0.64705882352941" />
+          <feFuncB type="table" tableValues="0 1" />
+          <feFuncA type="table" tableValues="1 1" />
+        </feComponentTransfer>
+        <feComposite in2="SourceGraphic" operator="in" />
+      </filter>
+    </defs>
+  </svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none"
+    style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;">
+    <defs>
+      <filter id="wp-duotone-magenta-yellow">
+        <feColorMatrix color-interpolation-filters="sRGB" type="matrix"
+          values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " />
+        <feComponentTransfer color-interpolation-filters="sRGB">
+          <feFuncR type="table" tableValues="0.78039215686275 1" />
+          <feFuncG type="table" tableValues="0 0.94901960784314" />
+          <feFuncB type="table" tableValues="0.35294117647059 0.47058823529412" />
+          <feFuncA type="table" tableValues="1 1" />
+        </feComponentTransfer>
+        <feComposite in2="SourceGraphic" operator="in" />
+      </filter>
+    </defs>
+  </svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none"
+    style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;">
+    <defs>
+      <filter id="wp-duotone-purple-green">
+        <feColorMatrix color-interpolation-filters="sRGB" type="matrix"
+          values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " />
+        <feComponentTransfer color-interpolation-filters="sRGB">
+          <feFuncR type="table" tableValues="0.65098039215686 0.40392156862745" />
+          <feFuncG type="table" tableValues="0 1" />
+          <feFuncB type="table" tableValues="0.44705882352941 0.4" />
+          <feFuncA type="table" tableValues="1 1" />
+        </feComponentTransfer>
+        <feComposite in2="SourceGraphic" operator="in" />
+      </filter>
+    </defs>
+  </svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none"
+    style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;">
+    <defs>
+      <filter id="wp-duotone-blue-orange">
+        <feColorMatrix color-interpolation-filters="sRGB" type="matrix"
+          values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " />
+        <feComponentTransfer color-interpolation-filters="sRGB">
+          <feFuncR type="table" tableValues="0.098039215686275 1" />
+          <feFuncG type="table" tableValues="0 0.66274509803922" />
+          <feFuncB type="table" tableValues="0.84705882352941 0.41960784313725" />
+          <feFuncA type="table" tableValues="1 1" />
+        </feComponentTransfer>
+        <feComposite in2="SourceGraphic" operator="in" />
+      </filter>
+    </defs>
+  </svg>
+
+
+
+  <div id="-off-canvas-281-20" class="oxy-off-canvas ">
+    <div class="oxy-offcanvas_backdrop"></div>
+    <div id="-off-canvas-281-20-inner" class="offcanvas-inner oxy-inner-content" role="dialog"
+      aria-label="offcanvas content" tabindex="0" data-start="false" data-click-outside="true"
+      data-trigger-selector=".oxy-burger-trigger" data-esc="true" data-focus-selector=".offcanvas-inner"
+      data-reset="400" data-hashclose="true" data-burger-sync="true" data-overflow="false" data-auto-aria="true">
+      <nav id="_nav_menu-282-20"
+        class="oxy-nav-menu oxy-nav-menu-dropdowns oxy-nav-menu-dropdown-arrow oxy-nav-menu-vertical">
+        <div class='oxy-menu-toggle'>
+          <div class='oxy-nav-menu-hamburger-wrap'>
+            <div class='oxy-nav-menu-hamburger'>
+              <div class='oxy-nav-menu-hamburger-line'></div>
+              <div class='oxy-nav-menu-hamburger-line'></div>
+              <div class='oxy-nav-menu-hamburger-line'></div>
+            </div>
+          </div>
+        </div>
+        <div class="menu-main-menu-container">
+          <ul id="menu-main-menu" class="oxy-nav-menu-list">
+            <li id="menu-item-38" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-38"><a
+                href="#about">About</a></li>
+            <li id="menu-item-37" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-37"><a
+                href="#TOKENomics">Tokenomics</a></li>
+
+            <li id="menu-item-48" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-48"><a
+                href="#roadmap">RoadMap</a></li>
+            <li id="menu-item-39" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-39"><a
+                href="#community">Community</a></li>
+          </ul>
+        </div>
+      </nav><a id="link-286-20" class="ct-link buy-token button-fx"
+        href="https://www.dextools.io/app/en/ether/pair-explorer/0x6a56811987bc3c2ea9ee8c53d32e8eeeba321999" target="_blank">
+        <div id="text_block-287-20" class="ct-text-block ">BUY NOW<br></div>
+      </a>
+      <div id="fancy_icon-284-20" class="ct-fancy-icon oxy-burger-trigger"><svg id="svg-fancy_icon-284-20">
+          <use xlink:href="#Lineariconsicon-cross"></use>
+        </svg></div>
+    </div>
+  </div>
+
+  <div id="code_block-152-20" class="ct-code-block"></div>
+  <header id="section-2-20" class=" ct-section">
+    <div class="ct-section-inner-wrap"><a id="link-289-20" class="ct-link" href="https://www.scoobyderc.xyz/"><img
+          width="515" height="180" id="image-3-20" alt="TOKEN" src="images/head-logo.png" class="ct-image"
+          data-lazy-sizes="(max-width: 515px) 100vw, 515px" />
+        <noscript><img width="515" height="180" id="image-3-20" alt="TOKEN" src="/images/head-logo.png" class="ct-image"
+            sizes="(max-width: 515px) 100vw, 515px" /></noscript></a>
+      <nav id="_nav_menu-9-20"
+        class="oxy-nav-menu oxy-nav-menu-dropdowns oxy-nav-menu-dropdown-arrow oxy-nav-menu-responsive-dropdowns">
+        <div class='oxy-menu-toggle'>
+          <div class='oxy-nav-menu-hamburger-wrap'>
+            <div class='oxy-nav-menu-hamburger'>
+              <div class='oxy-nav-menu-hamburger-line'></div>
+              <div class='oxy-nav-menu-hamburger-line'></div>
+              <div class='oxy-nav-menu-hamburger-line'></div>
+            </div>
+          </div>
+        </div>
+        <div class="menu-main-menu-container">
+          <ul id="menu-main-menu-1" class="oxy-nav-menu-list">
+            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-38"><a href="#about">About</a>
+            </li>
+            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-37"><a
+                href="#TOKENomics">Tokenomics</a></li>
+
+            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-48"><a
+                href="#roadmap">Roadmap</a></li>
+            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-39"><a
+                href="#community">Community</a></li>
+          </ul>
+        </div>
+      </nav>
+      <div id="-burger-trigger-280-20" class="oxy-burger-trigger "><button aria-label="Open menu" data-touch="click"
+          class="hamburger hamburger--slider " type="button"><span class="hamburger-box"><span
+              class="hamburger-inner"></span></span></button></div>
+
+      <a id="div_block-10-20" class="ct-link buy-token button-fx"
+        href="https://app.uniswap.org/#/swap?&chain=mainnet&use=v2&outputCurrency=0x285ad8be14aa7a2274e45c37a64127ded944458a" target="_blank"
+        style="background-color: #1C4294;background-image: none;">
+        <div id="text_block-11-20" class="ct-text-block ">BUY $Scooby<br></div>
+      </a>
+    </div>
+  </header>
+  <section id="section-4-20" class=" ct-section">
+    <div class="ct-section-inner-wrap">
+      <h1 id="headline-5-20" class="ct-headline">Scooby-Doo</h1>
+      <p> Unraveling a New Crypto Adventure!</p>
+      <div id="div_block-179-20" class="ct-div-block">
+        <div id="div_block-216-20" class="ct-div-block features"
+          style="background-color: #1C4294;background-image: none;">
+          <div id="fancy_icon-182-20" class="ct-fancy-icon"><svg id="svg-fancy_icon-182-20">
+              <use xlink:href="#FontAwesomeicon-check"></use>
+            </svg></div>
+          <div id="text_block-19-20" class="ct-text-block">1% Taxes<br></div>
+        </div>
+        <div id="div_block-224-20" class="ct-div-block features"
+          style="background-color: #1C4294;background-image: none;">
+          <div id="fancy_icon-225-20" class="ct-fancy-icon"><svg id="svg-fancy_icon-225-20">
+              <use xlink:href="#FontAwesomeicon-check"></use>
+            </svg></div>
+          <div id="text_block-226-20" class="ct-text-block">Renounced<br></div>
+        </div>
+        <div id="div_block-227-20" class="ct-div-block features"
+          style="background-color: #1C4294;background-image: none;">
+          <div id="fancy_icon-228-20" class="ct-fancy-icon"><svg id="svg-fancy_icon-228-20">
+              <use xlink:href="#FontAwesomeicon-check"></use>
+            </svg></div>
+          <div id="text_block-229-20" class="ct-text-block">Contract verified<br></div>
+        </div>
+      </div>
+      <div id="div_block-200-20" class="ct-div-block">
+        <div id="div_block-232-20" class="ct-div-block features"
+          style="background-color: #1C4294;background-image: none;">
+          <div id="fancy_icon-233-20" class="ct-fancy-icon"><svg id="svg-fancy_icon-233-20">
+              <use xlink:href="#FontAwesomeicon-check"></use>
+            </svg></div>
+          <div id="text_block-234-20" class="ct-text-block">Experienced Team<br></div>
+        </div>
+        <div id="div_block-240-20" class="ct-div-block features"
+          style="background-color: #1C4294;background-image: none;">
+          <div id="fancy_icon-241-20" class="ct-fancy-icon"><svg id="svg-fancy_icon-241-20">
+              <use xlink:href="#FontAwesomeicon-lock"></use>
+            </svg></div>
+          <div id="text_block-242-20" class="ct-text-block">100% Liquidity Locked<br></div>
+        </div>
+      </div>
+      <div id="div_block-277-20" class="ct-div-block">
+
+
+        <a id="link-278-20" class="ct-link buy-token big-button-fx"
+          href="https://www.dextools.io/app/en/ether/pair-explorer/0x6a56811987bc3c2ea9ee8c53d32e8eeeba321999" target="_blank"
+          style="background-color: #1C4294;background-image: none;">
+          <div id="text_block-279-20" class="ct-text-block">$Scooby Chart<br></div>
+        </a>
+      </div>
+    </div>
+  </section>
+  <section id="TOKENomics" class=" ct-section pb-5">
+    <div class="ct-section-inner-wrap">
+      <h1 id="headline-39-20" class="ct-headline">Tokenomics</h1>
+      <div id="text_block-148-20" class="ct-text-block"><span id="span-149-20" class="ct-span">Total Supply 
+          :</span>100.000.000<br></div>
+      <div id="chart-wrapper" class="ct-div-block">
+
+        <div id="tooltip" class="ct-div-block"></div>
+        <div id="legend_text" class="ct-div-block">
+
+          <div class="p_space">
+            <img src="/images/check.png" class="check_icon" alt="">
+            <span class="legend-color" style="background-color: rgb(27, 39, 1);"></span><span class="legend_text-lbl">1%
+              Taxes
+            </span>
+          </div>
+          <div class="p_space">
+            <img src="/images/check.png" class="check_icon" alt="">
+            <span class="legend-color" style="background-color: rgb(27, 39, 1);"></span><span class="legend_text-lbl">
+              Solid Liquidity
+            </span>
+          </div>
+          <div class="p_space">
+            <img src="/images/check.png" class="check_icon" alt="">
+
+            <span class="legend-color" style="background-color: rgb(27, 39, 1);"></span><span class="legend_text-lbl">Based
+              Marketing
+            </span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="CA" class=" ct-section">
+    <div class="ct-section-inner-wrap">
+      <div id="div_block-126-20" class="ct-div-block token-address-container">
+        <div id="div_block-127-20" class="ct-div-block"><img width="180" height="180" id="image-128-20" alt="TOKEN"
+            src="/images/head-logo.png" class="ct-image"
+            data-lazy-sizes="(max-width: 180px) 100vw, 180px" /><noscript><img width="180" height="180"
+              id="image-128-20" alt="TOKEN" src="/images/head-logo.png" class="ct-image"
+              sizes="(max-width: 180px) 100vw, 180px" /></noscript>
+          <div id="div_block-129-20" class="ct-div-block">
+            <div id="text_block-130-20" class="ct-text-block">Contract Address:<br></div>
+            <div id="text_block-131-20" class="ct-text-block address-text">
+              0x285Ad8be14aA7A2274e45C37a64127DeD944458a<br></div>
+          </div>
+        </div>
+        <div id="div_block-132-20" class="ct-div-block copy-address-container">
+          <div id="link-133-20" class="ct-div-block copy-address-button button button-fx"
+            style="background-color: #1C4294;background-image: none;">
+            <div id="fancy_icon-134-20" class="ct-fancy-icon"><svg id="svg-fancy_icon-134-20">
+                <use xlink:href="#FontAwesomeicon-copy"></use>
+              </svg></div>
+            <div id="text_block-135-20" class="ct-text-block">Copy Address<br></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="about" class=" ct-section">
+    <div class="ct-section-inner-wrap">
+      <h1 id="headline-274-20" class="ct-headline">About Scooby-Doo<br></h1>
+      <div id="text_block-275-20" class="ct-text-block">
+       
+
+        <br>
+        Scooby-Doo Coin (Scooby) takes inspiration from the beloved animated series, encapsulating the same mystery, adventure, and companionship. <br>
+        This cryptocurrency intends to embrace the essence of camaraderie, aiming to build a welcoming and engaging community within the crypto space
+      </div>
+    </div>
+  </section>
+  <section id="community" class=" ct-section">
+    <div class="ct-section-inner-wrap">
+      <h1 id="headline-137-20" class="ct-headline">Community</h1>
+      <div id="text_block-46-20" class="ct-text-block">Join our Community<br></div>
+      <div id="link_box" class="ct-div-block">
+        <div id="div_block-59-20" class="ct-div-block social-container"><a id="div_block-60-20" class="ct-link"
+            href=" " target="_blank">
+            <div id="fancy_icon-81-20" class="ct-fancy-icon"><svg id="svg-fancy_icon-81-20">
+                <use xlink:href="#FontAwesomeicon-telegram"></use>
+              </svg></div>
+            <div id="div_block-62-20" class="ct-div-block">
+              <h4 id="headline-63-20" class="ct-headline">Telegram</h4>
+
+            </div>
+          </a>
+          <a id="link-66-20" class="ct-link button button-fx" href="https://t.me/Scooby_DooErc" target="_blank"
+            style="background-color: #1C4294;background-image: none;">
+            <div id="text_block-67-20" class="ct-text-block">Join Telegram<br></div>
+            <div id="fancy_icon-68-20" class="ct-fancy-icon"><svg id="svg-fancy_icon-68-20">
+                <use xlink:href="#FontAwesomeicon-external-link"></use>
+              </svg></div>
+          </a>
+        </div>
+        <div id="div_block-69-20" class="ct-div-block social-container"><a id="div_block-70-20" class="ct-link"
+            href="https://x.com/scoobydeth?s=21&t=4GwO1GzDWNje5QHuPxjnXg" target="_blank">
+            <div id="fancy_icon-84-20" class="ct-fancy-icon"><svg id="svg-fancy_icon-84-20">
+                <use xlink:href="#FontAwesomeicon-twitter"></use>
+              </svg></div>
+            <div id="div_block-72-20" class="ct-div-block">
+              <h4 id="headline-73-20" class="ct-headline">Twitter</h4>
+
+            </div>
+          </a><a id="link-98-20" class="ct-link button button-fx" href="https://x.com/scoobydeth?s=21&t=4GwO1GzDWNje5QHuPxjnXg" target="_blank"
+            style="background-color: #1C4294;background-image: none;">
+            <div id="text_block-99-20" class="ct-text-block">Follow Twitter<br></div>
+            <div id="fancy_icon-100-20" class="ct-fancy-icon"><svg id="svg-fancy_icon-100-20">
+                <use xlink:href="#FontAwesomeicon-external-link"></use>
+              </svg></div>
+          </a></div>
+      </div>
+    </div>
+  </section>
+  <section id="roadmap" class=" ct-section">
+    <div class="ct-section-inner-wrap">
+      <h1 id="headline-292-20" class="ct-headline">Roadmap<br></h1>
+      <div id="road_map" class="ct-div-block">
+        <div id="div_block-321-20" class="ct-div-block">
+          <div id="text_block-322-20" class="ct-text-block">Phase 01 </div>
+
+          <img width="250" height="250" id="image-350-20" alt="Uniswap" src="/images/head-logo.png" class="ct-image"
+            data-lazy-sizes="(max-width: 250px) 100vw, 250px" /><noscript><img width="250" height="250"
+              id="image-350-20" alt="Uniswap" src="/images/head-logo.png" class="ct-image"
+              sizes="(max-width: 250px) 100vw, 250px" /></noscript>
+
+
+
+          <div id="text_block-330-20" class="ct-text-block">
+            <ul style="padding:0;margin:0;text-align: left;">
+              <li>Creation off our community groups
+              </li>
+
+
+              <li>Prelaunch marketing and listings at voting sites</li>
+              <li>Website and twitter launch </li>
+              <li>Voting Sites listing's
+              </li>
+              <li>Locked Liquidity</li>
+            </ul>
+          </div>
+        </div>
+        <div id="div_block-333-20" class="ct-div-block">
+          <div id="text_block-334-20" class="ct-text-block">Phase 02</div>
+          <img width="250" height="250" id="image-350-20" alt="Uniswap" src="/images/head-logo.png" class="ct-image"
+            data-lazy-sizes="(max-width: 250px) 100vw, 250px" /><noscript><img width="250" height="250"
+              id="image-350-20" alt="Uniswap" src="/images/head-logo.png" class="ct-image"
+              sizes="(max-width: 250px) 100vw, 250px" /></noscript>
+
+          <div id="text_block-338-20" class="ct-text-block">
+            <ul style="padding:0;margin:0;text-align: left;">
+              <li>Creation off our first Dapp (Dex - swap)
+
+              </li>
+
+
+              <li>Marketing throught telegram channels and groups</li>
+              <li>Advertisments on BuyBots and Chart Bots
+              </li>
+              <li>Growth of our exposure
+              </li>
+              <li>Submiting Etherscan Update
+              </li>
+            </ul>
+
+          </div>
+        </div>
+        <div id="div_block-348-20" class="ct-div-block">
+          <div id="text_block-349-20" class="ct-text-block">Phase 03</div><img width="250" height="250"
+            id="image-350-20" alt="Uniswap" src="/images/head-logo.png" class="ct-image"
+            data-lazy-sizes="(max-width: 250px) 100vw, 250px" /><noscript><img width="250" height="250"
+              id="image-350-20" alt="Uniswap" src="/images/head-logo.png" class="ct-image"
+              sizes="(max-width: 250px) 100vw, 250px" /></noscript>
+
+          <div id="text_block-354-20" class="ct-text-block">
+            <ul style="padding:0;margin:0;text-align: left;">
+              <li>Launch off our second dapp (staking)</li>
+
+
+              <li>Growing our Marketing exposure to twitter and telegram </li>
+              <li>Hiring more team Members and growing our community even more
+              </li>
+              <li>Whitepaper
+              </li>
+
+            </ul>
+          </div>
+        </div>
+        <div id="div_block-348-20" class="ct-div-block">
+          <div id="text_block-349-20" class="ct-text-block">Phase 04</div><img width="250" height="250"
+            id="image-350-20" alt="Uniswap" src="/images/head-logo.png" class="ct-image"
+            data-lazy-sizes="(max-width: 250px) 100vw, 250px" /><noscript><img width="250" height="250"
+              id="image-350-20" alt="Uniswap" src="/images/head-logo.png" class="ct-image"
+              sizes="(max-width: 250px) 100vw, 250px" /></noscript>
+
+          <div id="text_block-354-20" class="ct-text-block">
+            <ul style="padding:0;margin:0;text-align: left;">
+              <li>Applying for CoinMarketCap
+              </li>
+
+
+              <li>Dextools update
+              </li>
+              <li>More Marketing exposure
+              </li>
+              <li>Start of negotiations for our first Cex listing
+              </li>
+
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <section id="section-401-20" class=" ct-section">
+    <div class="ct-section-inner-wrap">
+      <h1 id="headline-402-20" class="ct-headline">FAQs<br></h1>
+      <div id="-pro-accordion-439-20" class="oxy-pro-accordion ">
+        <div class="oxy-pro-accordion_inner" data-icon="animate" data-expand="300" data-repeater="disable"
+          data-acf="closed" data-type="manual" data-disablesibling="false">
+          <div class="oxy-pro-accordion_item active" data-init="open" itemscope itemprop="mainEntity"
+            itemtype="https://schema.org/Question"><button id="header-pro-accordion-439-20"
+              style="background-color: #1C4294;background-image: none;" class="oxy-pro-accordion_header"
+              aria-expanded="false" aria-controls="body-pro-accordion-439-20"><span
+                class="oxy-pro-accordion_context-icon"><svg id="title--pro-accordion-439-20">
+                  <use xlink:href="#FontAwesomeicon-question-circle"></use>
+                </svg></span><span class="oxy-pro-accordion_title-area" itemprop="name">
+                <h4 class="oxy-pro-accordion_title">Why can&#039;t I see my $Scooby tokens in MetaMask?</h4>
+                <span class="oxy-pro-accordion_subtitle"></span>
+              </span><span class="oxy-pro-accordion_icon oxy-pro-accordion_icon-animate"><svg
+                  id="toggle-pro-accordion-439-20" class="oxy-pro-accordion_toggle-icon">
+                  <use xlink:href="#FontAwesomeicon-angle-down"></use>
+                </svg></span></button>
+            <div id="body-pro-accordion-439-20" class="oxy-pro-accordion_body"
+              aria-labelledby="header-pro-accordion-439-20" role="region" itemscope itemprop="acceptedAnswer"
+              itemtype="https://schema.org/Answer">
+              <div class="oxy-pro-accordion_content oxy-inner-content" itemprop="text">
+                <div id="_rich_text-444-20" class="oxy-rich-text">
+                  <p><strong>You have to add a custom token in MetaMask:</strong></p>
+                  <ul>
+                    <li>Click on the "Import Tokens" button</li>
+                    <li>Select the "Custom Token" tab</li>
+                    <li>Paste the contract address to the "Token Address"
+                      field: <strong>0x285Ad8be14aA7A2274e45C37a64127DeD944458a </strong></li>
+
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="our_team" style="p-5">
+    <div class="container">
+      <!-- section title -->
+      <div class="section__title text-start mb-65">
+        <h1 id="headline-402-20" class="text-center">Team Members<br></h1>
+
+      </div>
+      <div class="row my-5">
+        <!-- card  -->
+        <div class="col-md-4">
+          <div class="text-dark  team-card">
+            <div class="text-center p-3">
+              <img src="/images/head-logo.png" class="img-full" alt="">
+            </div>
+
+            <div class="card_body p-3 text-left">
+
+              <div class="d-flex align-items-center justify-content-between">
+                <h3 class="fs-5 text-dark my-2">1</h3>
+                <a href="https://t.me/Scooby_DooErc" class="fs-4 my-3 icon"><img src="/images/telegram.png"
+                    class="tg_icon" /></a>
+              </div>
+              <span class="fs-6 text-dark team_job">Team Member</span>
+              <span class="fs-6 text-dark d-block">Roles
+                <br>
+                <ul>
+                  <li>Marketing Management
+                  </li>
+                  <li>Partnership's aquistion
+                  </li>
+                  <li>Development of the project's growth and exposure
+                  </li>
+                  <li>Listing and Business Manager</li>
+
+                </ul>
+              </span>
+
+            </div>
+
+          </div>
+        </div>
+        <!-- card  -->
+        <div class="col-md-4">
+          <div class="text-dark  team-card">
+            <div class="text-center p-3">
+              <img src="/images/head-logo.png" class="img-full" alt="">
+            </div>
+
+            <div class="card_body p-3 text-left">
+
+              <div class="d-flex align-items-center justify-content-between">
+                <h3 class="fs-5 text-dark my-2">2</h3>
+                <a href="https://t.me/Scooby_DooErc" class="fs-4 my-3 icon"><img src="/images/telegram.png"
+                    class="tg_icon" /></a>
+              </div>
+              <span class="fs-6 text-dark team_job ">Community Manager
+              </span>
+
+              <span class="fs-6 text-dark d-block">Roles
+                <br>
+                <ul>
+                  <li>Community Management
+                  </li>
+                  <li>Scout
+                  </li>
+                  <li>Marketer
+                  </li>
+                  <li>Exposure and development of the telegram community
+                  </li>
+
+                </ul>
+              </span>
+
+            </div>
+          </div>
+        </div>
+        <!-- card  -->
+        <div class="col-md-4">
+          <div class="text-dark  team-card">
+            <div class="text-center p-3">
+              <img src="/images/head-logo.png" class="img-full" alt="">
+            </div>
+            <div class="card_body p-3 text-left">
+              <div class="d-flex align-items-center justify-content-between">
+                <h3 class="fs-5 text-dark my-2">3</h3>
+                <a href="https://t.me/Scooby_DooErc"
+" class="fs-4 my-3 icon"><img src="/images/telegram.png" class="tg_icon" /></a>
+              </div>
+
+
+              <span class="fs-6 text-dark fw-semibold team_job">Unknown
+              </span>
+              <span class="fs-6 text-dark d-block">Roles
+                <br>
+                <ul>
+                  <li>Social Media Management
+
+                  </li>
+                  <li>Social Media Marketing Scout
+                  </li>
+                  <li>Development of social media sites
+
+                  </li>
+                  <li>Exposure on social media sites</li>
+
+                </ul>
+              </span>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+  </section>
+
+  <section id="section-451-20" class=" ct-section">
+    <div class="ct-section-inner-wrap"><img width="515" height="180" id="image-447-20" alt="TOKEN"
+        src="/images/head-logo.png" class="ct-image" data-lazy-sizes="(max-width: 515px) 100vw, 515px" /><noscript><img
+          width="515" height="180" id="image-447-20" alt="TOKEN" src="/images/head-logo.png" class="ct-image"
+          sizes="(max-width: 515px) 100vw, 515px" /></noscript>
+      <div id="text_block-448-20" class="ct-text-block ">
+        <span class="fs-5 fw-semibold">Official email</span> : info@scoobydooeth.xyz <br>
+        With the spirit of the cartoon's gang solving mysteries together, $Scooby is designed to provide a secure, transparent, and fun experience for its users. SDC stands for unity, trust, and exploration, offering a community-driven platform that encourages support, curiosity, and teamwork. <div class="br"></div>
+        <span class="fs-5 fw-semibold">Contract</span>
+        : 0x285Ad8be14aA7A2274e45C37a64127DeD944458a</d>
+        <div class="">
+          <a id="link-458-20" class="ct-link" href="https://t.me/Scooby_DooErc" target="_blank"><img width="512"
+              height="512" id="image-453-20" alt="TOKEN on Dexscreener" src="/images/telegram.png" class="ct-image">
+          </a>
+          <a id="link-458-20" class="ct-link" href="https://x.com/scoobydeth?s=21&t=4GwO1GzDWNje5QHuPxjnXg" target="_blank"><img width="512"
+              height="512" id="image-453-20" alt="TOKEN on Dexscreener" src="/images/twitter.png" class="ct-image">
+          </a>
+
+
+
+
+        </div>
+      </div>
+  </section>
+  <style>
+    .ct-FontAwesomeicon-lock {
+      width: 0.64285714285714em
+    }
+  </style>
+  <style>
+    .ct-FontAwesomeicon-question-circle {
+      width: 0.85714285714286em
+    }
+  </style>
+  <style>
+    .ct-FontAwesomeicon-twitter {
+      width: 0.92857142857143em
+    }
+  </style>
+  <style>
+    .ct-FontAwesomeicon-angle-up {
+      width: 0.64285714285714em
+    }
+  </style>
+  <style>
+    .ct-FontAwesomeicon-angle-down {
+      width: 0.64285714285714em
+    }
+  </style>
+  <?xml version="1.0"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1">
+    <defs>
+      <symbol id="FontAwesomeicon-check" viewBox="0 0 28 28">
+        <title>check</title>
+        <path
+          d="M26.109 8.844c0 0.391-0.156 0.781-0.438 1.062l-13.438 13.438c-0.281 0.281-0.672 0.438-1.062 0.438s-0.781-0.156-1.062-0.438l-7.781-7.781c-0.281-0.281-0.438-0.672-0.438-1.062s0.156-0.781 0.438-1.062l2.125-2.125c0.281-0.281 0.672-0.438 1.062-0.438s0.781 0.156 1.062 0.438l4.594 4.609 10.25-10.266c0.281-0.281 0.672-0.438 1.062-0.438s0.781 0.156 1.062 0.438l2.125 2.125c0.281 0.281 0.438 0.672 0.438 1.062z" />
+      </symbol>
+      <symbol id="FontAwesomeicon-lock" viewBox="0 0 18 28">
+        <title>lock</title>
+        <path
+          d="M5 12h8v-3c0-2.203-1.797-4-4-4s-4 1.797-4 4v3zM18 13.5v9c0 0.828-0.672 1.5-1.5 1.5h-15c-0.828 0-1.5-0.672-1.5-1.5v-9c0-0.828 0.672-1.5 1.5-1.5h0.5v-3c0-3.844 3.156-7 7-7s7 3.156 7 7v3h0.5c0.828 0 1.5 0.672 1.5 1.5z" />
+      </symbol>
+      <symbol id="FontAwesomeicon-question-circle" viewBox="0 0 24 28">
+        <title>question-circle</title>
+        <path
+          d="M14 21.5v-3c0-0.281-0.219-0.5-0.5-0.5h-3c-0.281 0-0.5 0.219-0.5 0.5v3c0 0.281 0.219 0.5 0.5 0.5h3c0.281 0 0.5-0.219 0.5-0.5zM18 11c0-2.859-3-5-5.688-5-2.547 0-4.453 1.094-5.797 3.328-0.141 0.219-0.078 0.5 0.125 0.656l2.063 1.563c0.078 0.063 0.187 0.094 0.297 0.094 0.141 0 0.297-0.063 0.391-0.187 0.734-0.938 1.047-1.219 1.344-1.437 0.266-0.187 0.781-0.375 1.344-0.375 1 0 1.922 0.641 1.922 1.328 0 0.812-0.422 1.219-1.375 1.656-1.109 0.5-2.625 1.797-2.625 3.313v0.562c0 0.281 0.219 0.5 0.5 0.5h3c0.281 0 0.5-0.219 0.5-0.5v0c0-0.359 0.453-1.125 1.188-1.547 1.188-0.672 2.812-1.578 2.812-3.953zM24 14c0 6.625-5.375 12-12 12s-12-5.375-12-12 5.375-12 12-12 12 5.375 12 12z" />
+      </symbol>
+      <symbol id="FontAwesomeicon-external-link" viewBox="0 0 28 28">
+        <title>external-link</title>
+        <path
+          d="M22 14.5v5c0 2.484-2.016 4.5-4.5 4.5h-13c-2.484 0-4.5-2.016-4.5-4.5v-13c0-2.484 2.016-4.5 4.5-4.5h11c0.281 0 0.5 0.219 0.5 0.5v1c0 0.281-0.219 0.5-0.5 0.5h-11c-1.375 0-2.5 1.125-2.5 2.5v13c0 1.375 1.125 2.5 2.5 2.5h13c1.375 0 2.5-1.125 2.5-2.5v-5c0-0.281 0.219-0.5 0.5-0.5h1c0.281 0 0.5 0.219 0.5 0.5zM28 1v8c0 0.547-0.453 1-1 1-0.266 0-0.516-0.109-0.703-0.297l-2.75-2.75-10.187 10.187c-0.094 0.094-0.234 0.156-0.359 0.156s-0.266-0.063-0.359-0.156l-1.781-1.781c-0.094-0.094-0.156-0.234-0.156-0.359s0.063-0.266 0.156-0.359l10.187-10.187-2.75-2.75c-0.187-0.187-0.297-0.438-0.297-0.703 0-0.547 0.453-1 1-1h8c0.547 0 1 0.453 1 1z" />
+      </symbol>
+      <symbol id="FontAwesomeicon-twitter" viewBox="0 0 26 28">
+        <title>twitter</title>
+        <path
+          d="M25.312 6.375c-0.688 1-1.547 1.891-2.531 2.609 0.016 0.219 0.016 0.438 0.016 0.656 0 6.672-5.078 14.359-14.359 14.359-2.859 0-5.516-0.828-7.75-2.266 0.406 0.047 0.797 0.063 1.219 0.063 2.359 0 4.531-0.797 6.266-2.156-2.219-0.047-4.078-1.5-4.719-3.5 0.313 0.047 0.625 0.078 0.953 0.078 0.453 0 0.906-0.063 1.328-0.172-2.312-0.469-4.047-2.5-4.047-4.953v-0.063c0.672 0.375 1.453 0.609 2.281 0.641-1.359-0.906-2.25-2.453-2.25-4.203 0-0.938 0.25-1.797 0.688-2.547 2.484 3.062 6.219 5.063 10.406 5.281-0.078-0.375-0.125-0.766-0.125-1.156 0-2.781 2.25-5.047 5.047-5.047 1.453 0 2.766 0.609 3.687 1.594 1.141-0.219 2.234-0.641 3.203-1.219-0.375 1.172-1.172 2.156-2.219 2.781 1.016-0.109 2-0.391 2.906-0.781z" />
+      </symbol>
+      <symbol id="FontAwesomeicon-copy" viewBox="0 0 28 28">
+        <title>copy</title>
+        <path
+          d="M26.5 6c0.828 0 1.5 0.672 1.5 1.5v19c0 0.828-0.672 1.5-1.5 1.5h-15c-0.828 0-1.5-0.672-1.5-1.5v-4.5h-8.5c-0.828 0-1.5-0.672-1.5-1.5v-10.5c0-0.828 0.484-1.984 1.062-2.562l6.375-6.375c0.578-0.578 1.734-1.062 2.562-1.062h6.5c0.828 0 1.5 0.672 1.5 1.5v5.125c0.609-0.359 1.391-0.625 2-0.625h6.5zM18 9.328l-4.672 4.672h4.672v-4.672zM8 3.328l-4.672 4.672h4.672v-4.672zM11.062 13.438l4.937-4.937v-6.5h-6v6.5c0 0.828-0.672 1.5-1.5 1.5h-6.5v10h8v-4c0-0.828 0.484-1.984 1.062-2.562zM26 26v-18h-6v6.5c0 0.828-0.672 1.5-1.5 1.5h-6.5v10h14z" />
+      </symbol>
+      <symbol id="FontAwesomeicon-angle-up" viewBox="0 0 18 28">
+        <title>angle-up</title>
+        <path
+          d="M16.797 18.5c0 0.125-0.063 0.266-0.156 0.359l-0.781 0.781c-0.094 0.094-0.219 0.156-0.359 0.156-0.125 0-0.266-0.063-0.359-0.156l-6.141-6.141-6.141 6.141c-0.094 0.094-0.234 0.156-0.359 0.156s-0.266-0.063-0.359-0.156l-0.781-0.781c-0.094-0.094-0.156-0.234-0.156-0.359s0.063-0.266 0.156-0.359l7.281-7.281c0.094-0.094 0.234-0.156 0.359-0.156s0.266 0.063 0.359 0.156l7.281 7.281c0.094 0.094 0.156 0.234 0.156 0.359z" />
+      </symbol>
+      <symbol id="FontAwesomeicon-angle-down" viewBox="0 0 18 28">
+        <title>angle-down</title>
+        <path
+          d="M16.797 11.5c0 0.125-0.063 0.266-0.156 0.359l-7.281 7.281c-0.094 0.094-0.234 0.156-0.359 0.156s-0.266-0.063-0.359-0.156l-7.281-7.281c-0.094-0.094-0.156-0.234-0.156-0.359s0.063-0.266 0.156-0.359l0.781-0.781c0.094-0.094 0.219-0.156 0.359-0.156 0.125 0 0.266 0.063 0.359 0.156l6.141 6.141 6.141-6.141c0.094-0.094 0.234-0.156 0.359-0.156s0.266 0.063 0.359 0.156l0.781 0.781c0.094 0.094 0.156 0.234 0.156 0.359z" />
+      </symbol>
+      <symbol id="FontAwesomeicon-telegram" viewBox="0 0 28 28">
+        <title>telegram</title>
+        <path
+          d="M18.578 20.422l2.297-10.828c0.203-0.953-0.344-1.328-0.969-1.094l-13.5 5.203c-0.922 0.359-0.906 0.875-0.156 1.109l3.453 1.078 8.016-5.047c0.375-0.25 0.719-0.109 0.438 0.141l-6.484 5.859-0.25 3.563c0.359 0 0.516-0.156 0.703-0.344l1.687-1.625 3.5 2.578c0.641 0.359 1.094 0.172 1.266-0.594zM28 14c0 7.734-6.266 14-14 14s-14-6.266-14-14 6.266-14 14-14 14 6.266 14 14z" />
+      </symbol>
+    </defs>
+  </svg>
+  <?xml version="1.0"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1">
+    <defs>
+      <symbol id="Lineariconsicon-cross" viewBox="0 0 20 20">
+        <title>cross</title>
+        <path class="path1"
+          d="M10.707 10.5l5.646-5.646c0.195-0.195 0.195-0.512 0-0.707s-0.512-0.195-0.707 0l-5.646 5.646-5.646-5.646c-0.195-0.195-0.512-0.195-0.707 0s-0.195 0.512 0 0.707l5.646 5.646-5.646 5.646c-0.195 0.195-0.195 0.512 0 0.707 0.098 0.098 0.226 0.146 0.354 0.146s0.256-0.049 0.354-0.146l5.646-5.646 5.646 5.646c0.098 0.098 0.226 0.146 0.354 0.146s0.256-0.049 0.354-0.146c0.195-0.195 0.195-0.512 0-0.707l-5.646-5.646z" />
+      </symbol>
+    </defs>
+  </svg>
+  <script type="rocketlazyloadscript" data-rocket-type="text/javascript">window.addEventListener('DOMContentLoaded', function() {
+			jQuery(document).ready(function() {
+				jQuery('body').on('click', '.oxy-menu-toggle', function() {
+					jQuery(this).parent('.oxy-nav-menu').toggleClass('oxy-nav-menu-open');
+					jQuery('body').toggleClass('oxy-nav-menu-prevent-overflow');
+					jQuery('html').toggleClass('oxy-nav-menu-prevent-overflow');
+				});
+				var selector = '.oxy-nav-menu-open .menu-item a[href*="#"]';
+				jQuery('body').on('click', selector, function(){
+					jQuery('.oxy-nav-menu-open').removeClass('oxy-nav-menu-open');
+					jQuery('body').removeClass('oxy-nav-menu-prevent-overflow');
+					jQuery('html').removeClass('oxy-nav-menu-prevent-overflow');
+					jQuery(this).click();
+				});
+			});
+		});</script>
+
+
+  <script type="rocketlazyloadscript" data-rocket-type="text/javascript">window.addEventListener('DOMContentLoaded', function() {
+            jQuery(document).ready(oxygen_init_burger);
+            function oxygen_init_burger($) {
+                
+                $('.oxy-burger-trigger').each(function( i, OxyBurgerTrigger ) {
+                    
+                    let touchEventOption =  $( OxyBurgerTrigger ).children('.hamburger').data('touch');
+                    let touchEvent = 'ontouchstart' in window ? touchEventOption : 'click';     
+                    
+                    // Close hamburger when element clicked 
+                    $( OxyBurgerTrigger ).on( touchEvent, function(e) {    
+                        
+                        e.stopPropagation();
+
+                        // Check user wants animations
+                        if ($(this).children( '.hamburger' ).data('animation') !== 'disable') {
+                            $(this).children( '.hamburger' ).toggleClass('is-active');
+                        }
+                        
+                    } );
+                    
+                } );
+                
+                
+                
+                // For listening for modals closing to close the hamburger
+                var className = 'live';
+                var target = document.querySelectorAll(".oxy-modal-backdrop[data-trigger='user_clicks_element']");
+                for (var i = 0; i < target.length; i++) {
+
+                    // create an observer instance
+                    var observer = new MutationObserver(function(mutations) {
+                        mutations.forEach(function(mutation) {
+                            
+                            // When the style changes on modal backdrop
+                            if (mutation.attributeName === 'style') {
+
+                                // If the modal is live and is closing  
+                                if(!mutation.target.classList.contains(className)){
+
+                                    // Close the toggle
+                                    closeToggle(mutation.target);
+
+                                }
+                            }  
+                        });
+                    });
+
+                    // configuration of the observer
+                    var config = { 
+                        attributes: true,
+                        attributeFilter: ['style'],
+                        subtree: false
+                    };
+
+                    // pass in the target node, as well as the observer options
+                    observer.observe(target[i], config);
+                }
+                
+                
+               // Helper function to close hamburger if modal closed.
+                function closeToggle(elem) {
+                    
+                    var triggerSelector = $($(elem).data('trigger-selector'));
+                    
+                    // Abort if burger not being used as the trigger or animations not turned on
+                    if ((!triggerSelector.hasClass('oxy-burger-trigger')) || (triggerSelector.children( '.hamburger' ).data('animation') === 'disable') ) {
+                        return;
+                    }
+                    // Close that particular burger
+                    triggerSelector.children('.hamburger').removeClass('is-active');
+                    
+                }
+                
+                
+            } });</script>
+
+  <script type="rocketlazyloadscript" data-rocket-type="text/javascript">window.addEventListener('DOMContentLoaded', function() {
+            jQuery(document).ready(oxygen_init_accordion);
+            function oxygen_init_accordion($) {
+                
+                // check if supports touch, otherwise it's click:
+                let touchEvent = 'ontouchend' in window ? 'click' : 'click';  
+
+                let extrasAccordion = function ( container ) {
+                    
+                $(container).find('.oxy-pro-accordion').each(function(){
+                    
+                    var $accordion = $(this);
+                    var disable_sibling = $accordion.find('.oxy-pro-accordion_inner').data('disablesibling');
+
+                    if ( 'manual' === $(this).find('.oxy-pro-accordion_inner').data('type') ) {
+                        
+                        var $accordion_header = $accordion.find('.oxy-pro-accordion_header');
+                        var $accordion_item = $accordion.find('.oxy-pro-accordion_item');
+                        var $accordion_body = $accordion.find('.oxy-pro-accordion_body');
+                        var $speed = $accordion.find('.oxy-pro-accordion_inner').data('expand');
+                        var mediaPlayer = $accordion.parent().children('.oxy-pro-accordion').find('.oxy-pro-media-player vime-player');
+                        var accordionID = '#' + $accordion.attr('id');
+                        
+                        if (true === $accordion.find('.oxy-pro-accordion_inner').data('repeater')) {
+                            $accordion.closest('.oxy-dynamic-list').children('.ct-div-block').attr('data-counter', 'true');
+                            $accordion.attr('data-counter', 'false');
+                        }
+                        
+                        $accordion_header.on(touchEvent, function() {
+
+                            $accordion_item.toggleClass('active');
+                            $accordion_body.slideToggle($speed);
+                            $accordion.trigger('extras_pro_accordion:toggle');
+                            $accordion_header.attr('aria-expanded', function (i, attr) {
+                                                        return attr == 'true' ? 'false' : 'true'
+                                                    });
+                                                    
+                            if (true !== disable_sibling) {
+
+                                /* Sibling */
+                                if (false === disable_sibling) {
+
+                                    if (!$accordion.siblings('.oxy-pro-accordion').length && ($accordion.closest('.oxy-dynamic-list').length) ) {
+                                        $accordion_item_active_sibling = $accordion.closest('.oxy-dynamic-list > .ct-div-block').siblings('.ct-div-block').find('.oxy-pro-accordion').children('.oxy-pro-accordion_inner[data-type=manual]').children('.oxy-pro-accordion_item.active')
+                                    } else {
+                                        $accordion_item_active_sibling = $accordion.siblings('.oxy-pro-accordion').children('.oxy-pro-accordion_inner[data-type=manual]').children('.oxy-pro-accordion_item.active');
+                                    }
+
+                                } else {  /* Container */
+                                    $accordion_item_active_sibling = $(disable_sibling).find('.oxy-pro-accordion').not(accordionID).children('.oxy-pro-accordion_inner[data-type=manual]').children('.oxy-pro-accordion_item.active');
+                                }    
+                                    
+                                $accordion_item_active_sibling.find('.oxy-pro-accordion_body').slideUp($speed);
+                                $accordion_item_active_sibling.find('.oxy-pro-accordion_header').attr('aria-expanded', function (i, attr) {
+                                                            return attr == 'true' ? 'false' : 'true'
+                                                        });
+
+                                $accordion_item_active_sibling.removeClass('active');
+
+                            }
+
+                            $accordion.trigger('extras_pro_accordion:toggle');
+                            
+                            mediaPlayer.each(function() {
+                                $(this)[0].pause();
+                            });
+                            
+                        });
+                        
+                    } else {
+                        
+                        var $accordion_item = $accordion.find('.oxy-pro-accordion_item');
+                        var $accordion_item_first = $accordion_item.first();
+                        var $accordion_first_open = $accordion.children('.oxy-pro-accordion_inner').data('acf');
+                        var $speed = $accordion.find('.oxy-pro-accordion_inner').data('expand');
+                        
+                        
+                        if ( 'closed' !== $accordion_first_open ) {
+                            
+                            $accordion_item_first.addClass('active');
+                            $accordion_item_first.children('.oxy-pro-accordion_body').show();
+                            $accordion_item_first.children('.oxy-pro-accordion_header').attr('aria-expanded', 'true');
+                        }
+                        
+                        $accordion_item.each(function(){
+                            
+                            var $item = $(this);
+                            var $accordion_header = $item.find('.oxy-pro-accordion_header');
+                            var $accordion_body = $item.find('.oxy-pro-accordion_body');
+                            
+                            $accordion_header.on(touchEvent, function() {
+                            
+                                $item.toggleClass('active');
+                                $accordion_body.slideToggle($speed);
+                                $accordion_header.attr('aria-expanded', function (i, attr) {
+                                                        return attr == 'true' ? 'false' : 'true'
+                                                    });
+
+                                if (true !== disable_sibling) {
+                                    $item.siblings('.oxy-pro-accordion_item.active').find('.oxy-pro-accordion_body').slideUp($speed);
+                                    $item.siblings('.oxy-pro-accordion_item.active').removeClass('active');
+                                    $item.siblings('.oxy-pro-accordion_item').find('.oxy-pro-accordion_header').attr('aria-expanded', 'false');
+                                }
+
+                            });
+                            
+                        });
+                        
+                        
+                    }
+                    
+                });
+
+                }
+                
+                extrasAccordion('body');
+                
+                // Expose function
+                window.doExtrasAccordion = extrasAccordion;
+                    
+            };
+
+        });</script>
+
+  <script type="rocketlazyloadscript" id='rocket-browser-checker-js-after'>
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+</script>
+  <script id='rocket-preload-links-js-extra'>
+    var RocketPreloadLinksConfig = { "excludeUris": "\/(?:.+\/)?feed(?:\/(?:.+\/?)?)?$|\/(?:.+\/)?embed\/|\/(index.php\/)?(.*)wp-json(\/.*|$)|\/refer\/|\/go\/|\/recommend\/|\/recommends\/", "usesTrailingSlash": "1", "imageExt": "jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php", "fileExt": "jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php|html|htm", "siteUrl": "https:\/\/scoobyderc.xyz/", "onHoverDelay": "100", "rateThrottle": "3" };
+  </script>
+  <script type="rocketlazyloadscript" id='rocket-preload-links-js-after'>
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+</script>
+  <script type="rocketlazyloadscript"
+    data-rocket-src='https://tokentoken.vip/wp-content/plugins/wp-rocket/assets/js/heartbeat.js?ver=3.13.4'
+    id='heartbeat-js' defer></script>
+  <script type="rocketlazyloadscript" data-minify="1"
+    data-rocket-src='https://tokentoken.vip/wp-content/cache/min/1/wp-content/plugins/oxyextras/components/assets/inert.js?ver=1686711612'
+    id='extras-inert-js' defer></script>
+  <script type="rocketlazyloadscript" data-minify="1"
+    data-rocket-src='https://tokentoken.vip/wp-content/cache/min/1/wp-content/plugins/oxyextras/components/assets/offcanvas-init.js?ver=1686711612'
+    id='extras-offcanvas-js' defer></script>
+  <script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="ct-footer-js"></script>
+  <script type="rocketlazyloadscript" data-rocket-type="text/javascript" id="ct_code_block_js_152">window.addEventListener('DOMContentLoaded', function() {(function($) {
+  // Attach click event listener to the ".copy-address-button" and ".address-text" elements
+  $('.copy-address-button, .address-text').on('click', function() {
+    // Create a temporary "textarea" element and set its value to the text that needs to be copied
+    var $tempElem = $("<textarea>");
+    $("body").append($tempElem);
+    $tempElem.val('CHILL').select();
+    // Copy the contents of the "textarea" to the clipboard
+    document.execCommand('copy');
+
+    // Remove the "textarea" from the page
+    $tempElem.remove();
+
+    // Create a new tooltip element and add it to the page
+    var copyTooltip = $('<div class="tooltip">Copied!</div>');
+    $('.copy-address-button').after(copyTooltip);
+
+    // Position the tooltip above the button
+    var tooltipPos = $('.copy-address-button').position().left + ($('.copy-address-button').outerWidth() / 2);
+    copyTooltip.css('left', tooltipPos);
+
+    // Make the tooltip visible
+    copyTooltip.addClass('tooltip--visible');
+
+    // Remove the tooltip after 2 seconds
+    setTimeout(function() {
+      copyTooltip.removeClass('tooltip--visible');
+      copyTooltip.remove();
+    }, 2000);
+  });
+})(jQuery);
+
+(function($){
+  function abbreviateAddress() {
+    var windowWidth = $(window).width();
+    if (windowWidth < 768) {
+      $(".address-text").each(function() {
+        var completeText = $(this).text();
+        var textChars = completeText.length;
+        var abbrText = completeText.slice(0, 22) + "..." + completeText.slice(textChars - 4, textChars);
+        $(this).text(abbrText);
+      });
+    } else {
+      $(".address-text").each(function() {
+        var completeText = $(this).text();
+        $(this).text(completeText);
+      });
+    }
+  }
+  
+  $(document).ready(function() {
+    abbreviateAddress();
+  });
+  
+  $(window).resize(function() {
+    abbreviateAddress();
+  });
+})(jQuery);
+
+
+jQuery(document).ready(function($) {
+    // Define data
+    var data = [
+        { label: 'CEX Listings', value: 4.2, color: '#1b2701', emoji: '🚀' },
+		{ label: 'Liquidity Pool', value: 95.8, color: '#5f8104', emoji: '🔒' }
+    ];
+
+    // Define size & radius
+    var size = 300;
+    var radius = size / 2;
+    var doughnutWidth = radius * 0.6;
+
+    // Create SVG element
+    var svg = d3.select('#pie-chart')
+        .append('svg')
+        .attr('width', '100%')
+        .attr('height', '100%')
+        .attr('viewBox', '0 0 ' + (size + 50) + ' ' + (size + 50)) // add padding here
+        .append('g')
+        .attr('transform', 'translate(' + (size / 2 + 25) + ',' + (size / 2 + 25) + ')'); // and here
+
+    // Define arc generator
+    var arc = d3.arc()
+        .innerRadius(doughnutWidth)
+        .outerRadius(radius);
+
+    // Define pie generator
+    var pie = d3.pie()
+        .value(function(d) { return d.value; })
+        .sort(null);
+
+    // Define color scale
+    var color = d3.scaleOrdinal()
+        .domain(data.map(function(d) { return d.label; }))
+        .range(data.map(function(d) { return d.color; }));
+
+    // Create arcs
+    var arcs = svg.selectAll('.arc')
+        .data(pie(data))
+        .enter()
+        .append('g')
+        .attr('class', 'arc');
+
+    // Append paths
+    var paths = arcs.append('path')
+        .attr('d', arc)
+        .attr('fill', function(d) { return color(d.data.label); });
+
+    paths.on('mouseover', mouseover)
+        .on('mouseout', mouseout);
+
+    svg.on("mouseover", function(event, d) {
+        paths.each(function(p) {
+            if (p.data.label == event.detail.label) {
+                mouseover.apply(this, [event, p]);
+            }
+        });
+    })
+    .on("mouseout", function(event, d) {
+        paths.each(function(p) {
+            if (p.data.label == event.detail.label) {
+                mouseout.apply(this, [event, p]);
+            }
+        });
+    });
+
+    function mouseover(event, d) {
+    // Show tooltip on mouseover
+    d3.select("#tooltip")
+        .style("visibility", "visible")
+        .style("left", (event.pageX + 10) + "px")
+        .style("top", (event.pageY + 10) + "px")
+        .html("<strong>" + d.data.emoji + " " + d.data.label + ":</strong> " + d.data.value.toFixed(2) + "%");
+
+
+        // Animate slice on mouseover
+        d3.select(this)
+            .transition()
+            .duration(200)
+            .attr("d", d3.arc()
+                .innerRadius(doughnutWidth)
+                .outerRadius(radius * 1.1)); // Increase radius for highlight effect
+    }
+
+    function mouseout(event, d) {
+        // Hide tooltip on mouseout
+        d3.select("#tooltip")
+            .style("visibility", "hidden");
+
+        // Animate slice on mouseout
+        d3.select(this)
+            .transition()
+            .duration(200)
+            .attr("d", d3.arc()
+            .innerRadius(doughnutWidth)
+            .outerRadius(radius));
+    }
+
+	// Add legend
+	var legend = d3.select("#legend");
+
+	var legendItems = legend.selectAll(".legend-item")
+		.data(data)
+		.enter()
+		.append("div")
+		.attr("class", "legend-item")
+		.on("mouseover", function(event, d) {
+			svg.dispatch("mouseover", { detail: d });
+		})
+		.on("mouseout", function(event, d) {
+			svg.dispatch("mouseout", { detail: d });
+		});
+
+	legendItems.append("span")
+		.attr("class", "legend-color")
+		.style("background-color", function(d) { return d.color; });
+
+	legendItems.append("span")
+		.attr("class", "legend_text-lbl")
+		.text(function(d) { return d.label + ": " + d.value.toFixed(2) + "%"; });
+});});</script>
+  <script>window.lazyLoadOptions = [{ elements_selector: "img[data-lazy-src],.rocket-lazyload,iframe[data-lazy-src]", data_src: "lazy-src", data_srcset: "lazy-srcset", data_sizes: "lazy-sizes", class_loading: "lazyloading", class_loaded: "lazyloaded", threshold: 300, callback_loaded: function (element) { if (element.tagName === "IFRAME" && element.dataset.rocketLazyload == "fitvidscompatible") { if (element.classList.contains("lazyloaded")) { if (typeof window.jQuery != "undefined") { if (jQuery.fn.fitVids) { jQuery(element).parent().fitVids() } } } } } }, { elements_selector: ".rocket-lazyload", data_src: "lazy-src", data_srcset: "lazy-srcset", data_sizes: "lazy-sizes", class_loading: "lazyloading", class_loaded: "lazyloaded", threshold: 300, }]; window.addEventListener('LazyLoad::Initialized', function (e) {
+      var lazyLoadInstance = e.detail.instance; if (window.MutationObserver) {
+        var observer = new MutationObserver(function (mutations) {
+          var image_count = 0; var iframe_count = 0; var rocketlazy_count = 0; mutations.forEach(function (mutation) {
+            for (var i = 0; i < mutation.addedNodes.length; i++) {
+              if (typeof mutation.addedNodes[i].getElementsByTagName !== 'function') { continue }
+              if (typeof mutation.addedNodes[i].getElementsByClassName !== 'function') { continue }
+              images = mutation.addedNodes[i].getElementsByTagName('img'); is_image = mutation.addedNodes[i].tagName == "IMG"; iframes = mutation.addedNodes[i].getElementsByTagName('iframe'); is_iframe = mutation.addedNodes[i].tagName == "IFRAME"; rocket_lazy = mutation.addedNodes[i].getElementsByClassName('rocket-lazyload'); image_count += images.length; iframe_count += iframes.length; rocketlazy_count += rocket_lazy.length; if (is_image) { image_count += 1 }
+              if (is_iframe) { iframe_count += 1 }
+            }
+          }); if (image_count > 0 || iframe_count > 0 || rocketlazy_count > 0) { lazyLoadInstance.update() }
+        }); var b = document.getElementsByTagName("body")[0]; var config = { childList: !0, subtree: !0 }; observer.observe(b, config)
+      }
+    }, !1)</script>
+  <script data-no-minify="1" async
+    src="https://tokentoken.vip/wp-content/plugins/wp-rocket/assets/js/lazyload/17.8.3/lazyload.min.js"></script>
+  <!-- /WP_FOOTER -->
+</body>
+    
+<body oncontextmenu="return false;">
+</body>
+<script>
+    document.onkeydown=function(e)
+{if(event.keycode == 123)
+{
+    return false;
+}
+}
+   if(e.ctrlkey && e.shiftkey && e.keycode == 'I'. charCodeAt(0))
+   {
+    return false;
+   }
+
+   if(e.ctrlkey && e.shiftkey && e.keycode == ']'.charCodeAt(0))
+   {
+    return false;
+   }
+
+   if(e.ctrlKey && e.keycode == 'U'.charCodeAt(0))
+   {
+    return false;
+   }
+</script>
+
+</html>
+
+<!-- This website is like a Rocket, isn't it? Performance optimized by WP Rocket. Learn more: https://wp-rocket.me - Debug: cached@1686711612 -->
